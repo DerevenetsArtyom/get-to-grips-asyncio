@@ -43,24 +43,25 @@ class Scheduler:
                 self.runnable_tasks.append(task)  # add to the back of queue
 
 
-scheduler = Scheduler()
-scheduler.add(async_search(lucas(), lambda x: len(str(x)) >= 6))
-scheduler.run_to_completion()
-# >>> Running task 0 ... now yielded
-# >>> Running task 0 ... now yielded
-# >>> Running task 0 ... now yielded
-# >>> Running task 0 ... now yielded
-# >>> Running task 0 ... Completed with result: 103682
-scheduler.completed_tasks_results.pop(0)
-# >>> 103682
+if __name__ == '__main__':
+    scheduler = Scheduler()
+    scheduler.add(async_search(lucas(), lambda x: len(str(x)) >= 6))
+    scheduler.run_to_completion()
+    # >>> Running task 0 ... now yielded
+    # >>> Running task 0 ... now yielded
+    # >>> Running task 0 ... now yielded
+    # >>> Running task 0 ... now yielded
+    # >>> Running task 0 ... Completed with result: 103682
+    scheduler.completed_tasks_results.pop(0)
+    # >>> 103682
 
-scheduler.add(async_search(lucas(), lambda x: len(str(x)) >= 7))
-scheduler.add(async_search(lucas(), lambda x: len(str(x)) >= 9))
-scheduler.run_to_completion()
-# >>> Running task 1 ... now yielded
-# >>> Running task 0 ... now yielded
-# >>> Running task 1 ... now yielded
-# >>> Running task 0 ... Completed with result: 1149851
-# >>> Running task 1 ... now yielded
-# >>> Running task 1 ... now yielded
-# >>> Running task 1 ... Completed with result: 141422324
+    scheduler.add(async_search(lucas(), lambda x: len(str(x)) >= 7))
+    scheduler.add(async_search(lucas(), lambda x: len(str(x)) >= 9))
+    scheduler.run_to_completion()
+    # >>> Running task 1 ... now yielded
+    # >>> Running task 0 ... now yielded
+    # >>> Running task 1 ... now yielded
+    # >>> Running task 0 ... Completed with result: 1149851
+    # >>> Running task 1 ... now yielded
+    # >>> Running task 1 ... now yielded
+    # >>> Running task 1 ... Completed with result: 141422324
