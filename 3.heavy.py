@@ -1,8 +1,14 @@
-from main import lucas, async_print_matches, is_prime
-from scheduler import Scheduler
-
-scheduler = Scheduler()
-scheduler.add(async_print_matches(lucas(), is_prime))
-scheduler.run_to_completion()
+import time
 
 
+# 5) Create function that print a message and sleeps actually for some time
+def repetitive_message(message, interval_seconds):
+    """Yields control until time interval expires"""
+    while True:
+        print(message)
+        start = time.time()
+        expiry = start + interval_seconds
+        while True:
+            now = time.time()
+            if now >= expiry:
+                break
