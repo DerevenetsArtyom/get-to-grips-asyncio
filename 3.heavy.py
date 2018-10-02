@@ -1,20 +1,8 @@
-from math import sqrt
+from main import lucas, async_print_matches, is_prime
+from scheduler import Scheduler
 
-
-def is_prime(x):
-    """Pretty uneffective 'is_prime' function"""
-    if x < 2:
-        return False
-    for i in range(2, int(sqrt(x)) + 1):
-        if x % i == 0:
-            return False
-    return True
-
-
-def async_print_matches(iterable, predicate):
-    for item in iterable:
-        if predicate(item):
-            print('Found: ', item, end=', ')
-        yield
+scheduler = Scheduler()
+scheduler.add(async_print_matches(lucas(), is_prime))
+scheduler.run_to_completion()
 
 
