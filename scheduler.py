@@ -1,5 +1,5 @@
 from collections import deque
-from main import async_search, lucas
+from main import async_search, lucas, is_prime, async_print_matches
 
 
 # 3) Define simple coroutine/generator wrapper (keep track of 'id' as well)
@@ -65,3 +65,20 @@ if __name__ == '__main__':
     # >>> Running task 1 ... now yielded
     # >>> Running task 1 ... now yielded
     # >>> Running task 1 ... Completed with result: 141422324
+
+    scheduler.add(async_print_matches(lucas(), is_prime))  # >>> 0
+    scheduler.run_to_completion()
+    # >>> Running task 0 ... Found:  2, now yielded
+    # >>> Running task 0 ... now yielded
+    # >>> Running task 0 ... Found:  3, now yielded
+    # >>> Running task 0 ... now yielded
+    # >>> Running task 0 ... Found:  7, now yielded
+    # >>> Running task 0 ... Found:  11, now yielded
+    # >>> Running task 0 ... now yielded
+    # >>> Running task 0 ... Found:  29, now yielded
+    # >>> Running task 0 ... Found:  47, now yielded
+    # >>> Running task 0 ... now yielded
+    # >>> Running task 0 ... now yielded
+    # >>> Running task 0 ... Found:  199, now yielded
+    # >>> Running task 0 ... now yielded
+    # >>> Running task 0 ... Found:  521, now yielded
