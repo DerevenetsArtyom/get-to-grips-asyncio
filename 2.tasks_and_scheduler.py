@@ -1,4 +1,5 @@
 from collections import deque
+from main import async_search, lucas
 
 
 # 3) Define simple coroutine/generator wrapper (keep track of 'id' as well)
@@ -26,7 +27,7 @@ class Scheduler:
     def run_to_completion(self):
         while self.runnable_tasks:
             task = self.runnable_tasks.popleft()
-            print('Running task {} ...'.format(task.id), end='')
+            print('Running task {} ... '.format(task.id), end='')
             try:
                 yielded = next(task.routine)
             except StopIteration as stopped:  # task is finished, collect result
@@ -40,3 +41,26 @@ class Scheduler:
                 assert yielded is None  # yielded was successful
                 print('now yielded')
                 self.runnable_tasks.append(task)  # add to the back of queue
+
+
+scheduler = Scheduler()
+scheduler.add(async_search(lucas(), lambda x: len(str(x)) >= 6))
+scheduler.run_to_completion()
+# >>> Running task 0 ... now yielded
+# >>> Running task 0 ... now yielded
+# >>> Running task 0 ... now yielded
+# >>> Running task 0 ... now yielded
+# >>> Running task 0 ... Completed with result: 103682
+scheduler.completed_tasks_results.pop(0)
+# >>> 103682
+
+scheduler.add(async_search(lucas(), lambda x: len(str(x)) >= 7))
+scheduler.add(async_search(lucas(), lambda x: len(str(x)) >= 9))
+scheduler.run_to_completion()
+# >>> Running task 1 ... now yielded
+# >>> Running task 0 ... now yielded
+# >>> Running task 1 ... now yielded
+# >>> Running task 0 ... Completed with result: 1149851
+# >>> Running task 1 ... now yielded
+# >>> Running task 1 ... now yielded
+# >>> Running task 1 ... Completed with result: 141422324
