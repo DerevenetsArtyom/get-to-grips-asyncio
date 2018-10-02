@@ -14,7 +14,7 @@ def repetitive_message(message, interval_seconds):
 
 
 # 6) Refactor that to make it cooperative (return control)
-def async_repetitive_message(message, interval_seconds):
+def bug_async_repetitive_message(message, interval_seconds):
     """Yields control until time interval expires"""
     while True:
         print(message)
@@ -25,3 +25,21 @@ def async_repetitive_message(message, interval_seconds):
             if now >= expiry:
                 break
             yield
+
+# BUT if 'interval_seconds' in 'bug_async_repetitive_message' is 0,
+# coroutine will never yield (will never be reached) and will hog the system
+
+
+# 7) Finish refactoring and ensure that
+# coroutines always yield AT LEAST ONCE if they can't complete immediately
+def async_repetitive_message(message, interval_seconds):
+    """Yields control until time interval expires"""
+    while True:
+        print(message)
+        start = time.time()
+        expiry = start + interval_seconds
+        while True:
+            yield
+            now = time.time()
+            if now >= expiry:
+                break
