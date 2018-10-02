@@ -32,5 +32,3 @@ g = async_search(lucas(), lambda x: x >= 10)
 # <generator object async_search at 0x7f2b4aac8200>
 # actually encapsulate code and state of that code / function
 # >>> next(g)
-# >>> next(g)
-# >>> next(g)
