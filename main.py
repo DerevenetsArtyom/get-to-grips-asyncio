@@ -55,3 +55,15 @@ def async_print_matches(iterable, predicate):
         if predicate(item):
             print('Found: ', item, end=', ')
         yield
+
+# 9) Try to get cooperative execution of two functions
+
+# scheduler = Scheduler()
+# scheduler.add(
+#     async_repetitive_message("A Loud Automatic Repetitive Message", 2.5)
+# )
+# scheduler.add(async_print_matches(lucas(), is_prime))
+# scheduler.run_to_completion()
+
+# But we failed.
+# The reason is that "is_prime" function is blocking, it doesn't return control
