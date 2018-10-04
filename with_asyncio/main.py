@@ -40,3 +40,11 @@ async def repetitive_message(message, interval_seconds):
     while True:
         print(message)
         await asyncio.sleep(interval_seconds)
+
+if __name__ == '__main__':
+    scheduler = asyncio.get_event_loop()  # instead of old Scheduler()
+    scheduler.create_task(  # instead of old .add()
+        repetitive_message("A Loud Automatic Repetitive Message", 2.5)
+    )
+    scheduler.create_task(print_matches(lucas(), is_prime))
+    scheduler.run_forever()  # instead of old .run_to_completion()
