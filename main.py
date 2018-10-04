@@ -27,7 +27,7 @@ def async_search(iterable, predicate):
     for item in iterable:
         if predicate(item):
             return item
-        yield
+        yield  # could be ```yield from async_sleep(0)```
     raise ValueError("Not Found")
 
 

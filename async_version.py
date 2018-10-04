@@ -8,7 +8,7 @@ def async_is_prime(x):
     for i in range(2, int(sqrt(x)) + 1):
         if x % i == 0:
             return False
-        yield
+        yield  # could be ```yield from async_sleep(0)```
     return True
 
 
