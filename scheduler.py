@@ -2,7 +2,7 @@ from collections import deque
 from main import async_search, lucas, is_prime, async_print_matches
 
 
-# 3) Define simple coroutine/generator wrapper (keep track of 'id' as well)
+# 3) Define a simple wrapper for coroutine/generator (keep track of id as well)
 class Task:
     next_id = 0
 
@@ -12,7 +12,7 @@ class Task:
         self.routine = routine
 
 
-# 4) Define simple scheduler
+# 4) Define a simple scheduler
 class Scheduler:
     def __init__(self):
         self.runnable_tasks = deque()
@@ -30,11 +30,11 @@ class Scheduler:
             print('Running task {} ... '.format(task.id), end='')
             try:
                 yielded = next(task.routine)
-            except StopIteration as stopped:  # task is finished, collect result
+            except StopIteration as stopped:  # task is finished, save result
                 value = stopped.value
                 print('Completed with result: {}'.format(value))
                 self.completed_tasks_results[task.id] = value
-            except Exception as e:
+            except Exception as e:  # task is failed, save result
                 print('Failed with exception: {}'.format(e))
                 self.failed_tasks_errors[task.id] = e
             else:

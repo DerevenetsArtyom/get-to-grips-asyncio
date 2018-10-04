@@ -1,7 +1,7 @@
 import time
 
 
-# 5) Create function that print a message and sleeps actually for some time
+# 5) Create a function that prints a message and sleeps actually for some time
 def repetitive_message(message, interval_seconds):
     while True:
         print(message)
@@ -13,7 +13,7 @@ def repetitive_message(message, interval_seconds):
                 break
 
 
-# 6) Refactor that to make it cooperative (return control)
+# 6) Refactor function above to make it cooperative (return control)
 def bug_async_repetitive_message(message, interval_seconds):
     """Yields control until time interval expires"""
     while True:
@@ -27,7 +27,7 @@ def bug_async_repetitive_message(message, interval_seconds):
             yield
 
 # BUT if 'interval_seconds' in 'bug_async_repetitive_message' is 0,
-# coroutine will never yield (will never be reached) and will hog the system
+# coroutine will never yield (will never be reached) and hog the system
 
 
 # 7) Finish refactoring and ensure that

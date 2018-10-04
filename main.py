@@ -1,7 +1,7 @@
 from math import sqrt
 
 
-# This is example function used as sequence producer
+# This is simple function used as sequence producer
 def lucas():
     yield 2
     a, b = 2, 1
@@ -10,7 +10,7 @@ def lucas():
         a, b = b, a + b
 
 
-# 1) Regular function: directly returns the result or raises an exception
+# 1) Just regular function: directly returns the result or raises an exception
 def search(iterable, predicate):
     for item in iterable:
         if predicate(item):
@@ -22,7 +22,7 @@ search(lucas(), lambda x: len(str(x)) >= 6)
 # >>> 103682
 
 
-# 2) Periodically yields control to scheduler
+# 2) Periodically yields control to scheduler (on every iteration)
 def async_search(iterable, predicate):
     for item in iterable:
         if predicate(item):
@@ -36,11 +36,12 @@ g = async_search(lucas(), lambda x: x >= 10)
 # actually encapsulate code and state of that code / function
 # >>> next(g)
 
+# ....... go to the 'scheduler.py' here
 
-# .......
 
+# 8) Create long-running function with CPU-bounded calculation
 def is_prime(x):
-    """Pretty uneffective 'is_prime' function"""
+    """Pretty ineffective function"""
     if x < 2:
         return False
     for i in range(2, int(sqrt(x)) + 1):
