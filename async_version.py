@@ -1,6 +1,5 @@
-from main import lucas, is_prime
-from repetitive_message_evolution import async_repetitive_message
-from scheduler import Scheduler
+import time
+from math import sqrt
 
 
 def async_is_prime(x):
@@ -21,3 +20,16 @@ def async_print_matches(iterable, async_predicate):
             print('Found: ', item, end=', ')
         # yield at the end is no needed, we yielding from 'inner' coroutine
 
+
+def async_sleep(interval_seconds):
+    # Always yields at least once.
+    # P.S.: ```async_sleep(0)``` yields exactly once
+    # PP.S: 'bare yield' can be replaced with ```yield from async_sleep(0)```
+    # and only that function could contain 'bare yield'
+    start = time.time()
+    expiry = start + interval_seconds
+    while True:
+        yield
+        now = time.time()
+        if now >= expiry:
+            break
