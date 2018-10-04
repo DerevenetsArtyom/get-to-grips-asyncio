@@ -19,7 +19,7 @@ def async_print_matches(iterable, async_predicate):
         # allow the predicate to make progress and yield control
         matches = yield from async_predicate(item)
         if matches:
-            print('Found: ', item, end=', ')
+            print('Found: ', item)
         # yield at the end is no needed, we yielding from 'inner' coroutine
 
 
@@ -43,3 +43,37 @@ def async_repetitive_message(message, interval_seconds):
     while True:
         print(message)
         yield from async_sleep(interval_seconds)
+
+
+# 11) Try one more time to get cooperative execution of two functions
+# now this non-blocking 'async_is_prime' that was an issue lat time.
+if __name__ == '__main__':
+    scheduler = Scheduler()
+    scheduler.add(
+        async_repetitive_message("A Loud Automatic Repetitive Message", 2.5)
+    )
+    scheduler.add(async_print_matches(lucas(), async_is_prime))
+    # NB: prints inside "run_to_completion" should be disabled
+    scheduler.run_to_completion()
+    # >>> A Loud Automatic Repetitive Message
+    # >>> Found:  2
+    # >>> Found:  3
+    # >>> Found:  7
+    # >>> Found:  11
+    # >>> Found:  29
+    # >>> Found:  47
+    # >>> Found:  199
+    # >>> Found:  521
+    # >>> Found:  2207
+    # >>> Found:  3571
+    # >>> Found:  9349
+    # >>> Found:  3010349
+    # >>> Found:  54018521
+    # >>> Found:  370248451
+    # >>> Found:  6643838879
+    # >>> Found:  119218851371
+    # >>> A Loud Automatic Repetitive Message
+    # >>> Found:  5600748293801
+    # >>> A Loud Automatic Repetitive Message
+    # >>> A Loud Automatic Repetitive Message
+
