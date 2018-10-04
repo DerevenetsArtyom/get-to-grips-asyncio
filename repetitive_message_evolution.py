@@ -1,5 +1,4 @@
 import time
-from async_version import async_sleep
 
 
 # 5) Create a function that prints a message and sleeps actually for some time
@@ -46,11 +45,3 @@ def async_repetitive_message_first(message, interval_seconds):
                 break
 
 # .... go back to 'main.py'
-
-
-# 10) Refactoring using async_sleep()
-def async_repetitive_message(message, interval_seconds):
-    """Yields control until time interval expires"""
-    while True:
-        print(message)
-        yield from async_sleep(interval_seconds)

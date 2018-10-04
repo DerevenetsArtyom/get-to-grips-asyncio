@@ -1,5 +1,7 @@
 import time
 from math import sqrt
+from scheduler import Scheduler
+from main import lucas
 
 
 def async_is_prime(x):
@@ -33,3 +35,11 @@ def async_sleep(interval_seconds):
         now = time.time()
         if now >= expiry:
             break
+
+
+# 10) Refactoring using async_sleep()
+def async_repetitive_message(message, interval_seconds):
+    """Yields control until time interval expires"""
+    while True:
+        print(message)
+        yield from async_sleep(interval_seconds)
