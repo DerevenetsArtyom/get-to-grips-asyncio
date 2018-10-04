@@ -60,7 +60,7 @@ def async_print_matches(iterable, predicate):
 
 # scheduler = Scheduler()
 # scheduler.add(
-#     async_repetitive_message("A Loud Automatic Repetitive Message", 2.5)
+#     async_repetitive_message_first("A Loud Automatic Repetitive Message", 2.5)
 # )
 # scheduler.add(async_print_matches(lucas(), is_prime))
 # scheduler.run_to_completion()

@@ -1,4 +1,5 @@
 import time
+from async_version import async_sleep
 
 
 # 5) Create a function that prints a message and sleeps actually for some time
@@ -32,7 +33,7 @@ def bug_async_repetitive_message(message, interval_seconds):
 
 # 7) Finish refactoring and ensure that
 # coroutines always yield AT LEAST ONCE if they can't complete immediately
-def async_repetitive_message(message, interval_seconds):
+def async_repetitive_message_first(message, interval_seconds):
     """Yields control until time interval expires"""
     while True:
         print(message)
@@ -43,3 +44,13 @@ def async_repetitive_message(message, interval_seconds):
             now = time.time()
             if now >= expiry:
                 break
+
+# .... go back to 'main.py'
+
+
+# 10) Refactoring using async_sleep()
+def async_repetitive_message(message, interval_seconds):
+    """Yields control until time interval expires"""
+    while True:
+        print(message)
+        yield from async_sleep(interval_seconds)
