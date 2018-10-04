@@ -37,16 +37,6 @@ async def print_matches(iterable, async_predicate):
             print('Found: ', item)
 
 
-async def sleep(interval_seconds):
-    start = time.time()
-    expiry = start + interval_seconds
-    while True:
-        yield
-        now = time.time()
-        if now >= expiry:
-            break
-
-
 async def repetitive_message(message, interval_seconds):
     while True:
         print(message)

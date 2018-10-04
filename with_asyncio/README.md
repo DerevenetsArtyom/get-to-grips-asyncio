@@ -3,3 +3,4 @@ to asyncio code.
 1) def async_foo --> async def foo
 2) import asyncio
 3) async_sleep(x) --> asyncio.sleep(x)
+4) Remove original async_sleep()
