@@ -4,3 +4,4 @@ to asyncio code.
 2) import asyncio
 3) async_sleep(x) --> asyncio.sleep(x)
 4) Remove original async_sleep()
+5) yield from foo --> await foo
