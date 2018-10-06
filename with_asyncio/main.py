@@ -12,7 +12,7 @@ def lucas():
 
 async def search(iterable, predicate):
     for item in iterable:
-        if predicate(item):
+        if await predicate(item):
             return item
         await asyncio.sleep(0)
     raise ValueError("Not Found")
