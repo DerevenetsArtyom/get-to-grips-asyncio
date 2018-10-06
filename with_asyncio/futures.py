@@ -4,8 +4,8 @@ from main import lucas, is_prime, search
 # FUTURE - encapsulates a potential result or error
 
 
-async def ten_digits_prime(x):
-    return (await is_prime(x)) and len(str(x)) == 10
+async def twelve_digits_prime(x):
+    return (await is_prime(x)) and len(str(x)) == 12
 
 
 async def monitored_search(iterable, predicate, future):
@@ -26,8 +26,9 @@ async def monitor_future(future, interval_seconds):
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
+    # same future object will be used in 'monitored_search' and 'monitor_future'
     future = loop.create_future()
-    co_obj = monitored_search(lucas(), ten_digits_prime, future)
+    co_obj = monitored_search(lucas(), twelve_digits_prime, future)
     loop.create_task(co_obj)
     loop.create_task(monitor_future(future, 1))
     loop.run_until_complete(future)
